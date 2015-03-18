@@ -109,7 +109,7 @@
   _.uniq = function(array) {
     var uniqueValues = [];
     for (var i = 0; i < array.length; i++) {
-      if (_.indexOf(array, array[i]) === _.lastIndexOf(array, array[i])) {
+      if (_.indexOf(uniqueValues, array[i]) === -1) {
         uniqueValues.push(array[i]);
       }
     }
