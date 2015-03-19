@@ -83,11 +83,12 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var passedTest = [];
-    for(var i = 0; i < collection.length; i++) {
-      if (test(collection[i])) {
-        passedTest.push(collection[i]);
+
+    _.each(collection, function(item) {
+      if (test(item) === true) {
+        passedTest.push(item);
       }
-    }
+    });
     return passedTest;
   };
 
@@ -97,22 +98,22 @@
     // copying code in and modifying it
     var failedTest = [];
     var passedTest = _.filter(collection, test);
-    for (var i = 0; i < collection.length; i++) {
-      if (_.indexOf(passedTest, collection[i]) === -1) {
-        failedTest.push(collection[i]);
+    _.each(collection, function(item){
+      if(_.indexOf(passedTest, item) === -1) {
+        failedTest.push(item);
       }
-    }
+    });
     return failedTest;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     var uniqueValues = [];
-    for (var i = 0; i < array.length; i++) {
-      if (_.indexOf(uniqueValues, array[i]) === -1) {
-        uniqueValues.push(array[i]);
+    _.each(array, function(item) {
+      if(_.indexOf(uniqueValues, item) === -1) {
+        uniqueValues.push(item);
       }
-    }
+    });
     return uniqueValues;
   };
 
@@ -123,15 +124,10 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
       var iteratedResultsArray = [];
-      if (Array.isArray(collection)) {
-      for (var i = 0; i < collection.length; i++) {
-        iteratedResultsArray.push(iterator(collection[i], i, collection));
-      }
-    } else {
-      for (var key in collection) {
-        iteratedResultsArray.push(iterator(collection[i], i, collection));
-      }
-    }
+
+      _.each(collection, function(item){
+        iteratedResultsArray.push(iterator(item));
+      })
     return iteratedResultsArray;
   };
 
