@@ -316,20 +316,35 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var alreadyPassed;
-    var result;
-
+    var alreadyPassed = {};
+    // var result;
+    // var executed = false;
+    var standIn = _.identity; 
     return function() {
-      if (arguments != alreadyPassed) {
-        result = func.apply(this, arguments);
-        alreadyPassed = arguments;
-        return result;
+      var key = standIn.apply(this, arguments);
+      if(alreadyPassed.hasOwnProperty(key)) {
+        return alreadyPassed[key];
       } else {
-        return result;
+        return alreadyPassed[key] = func.apply(this, arguments);
       }
     };
-  };
 
+
+    // return function() {
+    //   for (var key in alreadyPassed) {
+    //     if (alreadyPassed[key] === arguments) {
+    //       executed = true;
+    //       return key;
+    //     } 
+    //   }
+    //   if (!executed) {
+    //     result = func.apply(this, arguments);
+    //     alreadyPassed[result] = arguments;
+    //     return result;
+    //   }
+    // };
+  };
+    
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
   //
