@@ -398,6 +398,16 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    if (typeof functionOrKey === 'function') {
+       return _.map(collection, function(item) {
+          return functionOrKey.apply(item, args);
+       });
+     } else {
+      return _.map(collection, function(item){
+        var appliedMethod = item[functionOrKey].apply(item, args);
+        return appliedMethod;
+      });
+     }
   };
 
   // Sort the object's values by a criterion produced by an iterator.
