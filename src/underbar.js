@@ -383,7 +383,11 @@
       shuffleArray[hasItems] = shuffleArray[randomIndex];
       shuffleArray[randomIndex] = tempValue;
     }
-    return shuffleArray;
+    if (shuffleArray.join()===array.join()){
+      _.shuffle(array);
+    } else {
+      return shuffleArray;
+    }
   };
 
 
