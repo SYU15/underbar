@@ -430,6 +430,11 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    return _.reduce(nestedArray, function(result, item){
+      if (Array.isArray(item)) {
+        return result.concat(item);
+      }
+    });
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
