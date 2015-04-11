@@ -384,7 +384,7 @@
       shuffleArray[randomIndex] = tempValue;
     }
     if (shuffleArray.join()===array.join()){
-      _.shuffle(array);
+      return _.shuffle(array);
     } else {
       return shuffleArray;
     }
